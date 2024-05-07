@@ -19,6 +19,4 @@
 ---
 include:
   - board: mjolnir_rh
-    shield: nice_view
   - board: mjolnir_lh
-    shield: nice_view
