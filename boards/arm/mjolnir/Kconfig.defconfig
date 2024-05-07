@@ -1,0 +1,52 @@
+if BOARD_MJOLNIR_LH
+
+config BOARD
+    default "mjolnir lh"
+
+config ZMK_SPLIT_BLE_ROLE_CENTRAL
+    default y
+
+endif # BOARD_MJOLNIR_LH
+
+if BOARD_MJOLNIR_RH
+
+config BOARD
+    default "mjolnir rh"
+
+endif # BOARD_MJOLNIR_RH
+
+if BOARD_MJOLNIR_LH || BOARD_MJOLNIR_RH
+
+config ZMK_SPLIT
+    default y
+
+config BT_CTLR
+    default BT
+
+config ZMK_KSCAN_MATRIX_WAIT_BETWEEN_OUTPUTS
+    default 5
+
+config PINCTRL
+    default y
+
+if USB
+
+config USB_NRFX
+    default y
+
+config USB_DEVICE_STACK
+    default y
+
+endif # USB
+
+if ZMK_BACKLIGHT
+
+config PWM
+    default y
+
+config LED_PWM
+    default y
+
+endif # ZMK_BACKLIGHT
+
+endif # BOARD_MJOLNIR_LH || BOARD_MJOLNIR_RH

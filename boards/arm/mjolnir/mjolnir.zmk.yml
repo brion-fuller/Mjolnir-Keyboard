@@ -1,0 +1,14 @@
+file_format: "1"
+id: mjolnir
+name: Mjolnir
+type: board
+arch: arm
+features:
+  - keys
+  - backlight
+outputs:
+  - usb
+  - ble
+siblings:
+  - mjolnir_lh
+  - mjolnir_rh

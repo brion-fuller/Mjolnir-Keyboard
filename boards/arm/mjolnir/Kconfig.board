@@ -1,0 +1,7 @@
+config BOARD_MJOLNIR_LH
+    bool "Mjolnir LH"
+    depends on SOC_NRF52840_QIAA
+
+config BOARD_MJOLNIR_RH
+    bool "Mjolnir RH"
+    depends on SOC_NRF52840_QIAA
