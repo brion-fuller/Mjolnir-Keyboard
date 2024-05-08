@@ -8,10 +8,20 @@ config ZMK_SPLIT_ROLE_CENTRAL
 
 endif # BOARD_MJOLNIR_LH
 
-config BOARD
-    default "mjolnir"
+if BOARD_MJOLNIR_RH
+
+config ZMK_KEYBOARD_NAME
+    default "Mjolnir"
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+endif # BOARD_MJOLNIR_RH
 
 if BOARD_MJOLNIR_LH || BOARD_MJOLNIR_RH
+
+config BOARD
+    default "mjolnir"
 
 config ZMK_SPLIT
     default y
