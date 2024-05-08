@@ -4,6 +4,9 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 
 / {
+    model = "Mjolnir";
+    compatible = "mjolnir";
+
     chosen {
 		zephyr,code-partition = &code_partition;
 		zephyr,sram = &sram0;
@@ -31,6 +34,10 @@
         wakeup-source;
     };
 
+    statusled: leds {
+        compatible = "gpio-leds";
+    };
+
 };
 
 &gpio0 {
@@ -45,7 +52,6 @@
     status = "okay";
     cdc_acm_uart: cdc_acm_uart {
         compatible = "zephyr,cdc-acm-uart";
-        label = "CDC_ACM_0";
     }; 
 };
 

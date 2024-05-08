@@ -1,4 +1,4 @@
-if BOARD_MJOLNIR_LH
+if BOARD_MJOLNIR_LEFT
 
 config ZMK_KEYBOARD_NAME
     default "Mjolnir"
@@ -6,19 +6,9 @@ config ZMK_KEYBOARD_NAME
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
 
-endif # BOARD_MJOLNIR_LH
+endif # BOARD_MJOLNIR_LEFT
 
-if BOARD_MJOLNIR_RH
-
-config ZMK_KEYBOARD_NAME
-    default "Mjolnir"
-
-config ZMK_SPLIT_ROLE_CENTRAL
-    default y
-
-endif # BOARD_MJOLNIR_RH
-
-if BOARD_MJOLNIR_LH || BOARD_MJOLNIR_RH
+if BOARD_MJOLNIR_LEFT || BOARD_MJOLNIR_RIGHT
 
 config BOARD
     default "mjolnir"
@@ -45,4 +35,4 @@ config MAX17048
 
 endif # USB
 
-endif # BOARD_MJOLNIR_LH || BOARD_MJOLNIR_RH
+endif # BOARD_MJOLNIR_LEFT || BOARD_MJOLNIR_RIGHT
