@@ -18,5 +18,5 @@
 #
 ---
 include:
-  - board: Mjolnir Left
-  - board: Mjolnir Right
+  - board: mjolnir_left
+  - board: mjolnir_right
