@@ -1,5 +1,5 @@
 #include "mjolnir.dtsi"
-#include "mjolnir_rh-pinctrl.dtsi"
+#include "mjolnir_right-pinctrl.dtsi"
 
 /* For right hand, the columns are offset by 19 */
 &default_transform {
