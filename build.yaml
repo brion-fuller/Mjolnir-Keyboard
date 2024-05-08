@@ -18,9 +18,5 @@
 #
 ---
 include:
-  - board: mjolnir_rh
-  - board: mjolnir_lh
-  - board: mjolnir_rh
-    shield: settings_reset
-  - board: mjolnir_lh
-    shield: settings_reset
+  - board: Mjolnir Left
+  - board: Mjolnir Right
