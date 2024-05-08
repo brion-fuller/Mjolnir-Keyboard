@@ -20,3 +20,5 @@
 include:
   - board: mjolnir_left
   - board: mjolnir_right
+  - board: mjolnir_left_flip
+  - board: mjolnir_right_flip
