@@ -47,6 +47,6 @@
 
 &statusled {
     blue_led: led_0 {
-        gpios = <&gpio0 26 GPIO_ACTIVE_HIGH>;
+        gpios = <&gpio0 26 GPIO_ACTIVE_LOW>;
     };
 };
