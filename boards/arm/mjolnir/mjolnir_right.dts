@@ -46,6 +46,10 @@
 	};
 };
 
+&rgbpower {
+    control-gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>; /* WS2812_CE */
+};
+
 &statusled {
     blue_led: led_0 {
         gpios = <&gpio0 26 GPIO_ACTIVE_LOW>;

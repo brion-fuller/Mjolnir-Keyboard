@@ -31,6 +31,11 @@
         >;
     };
 
+    rgbpower: EXT_POWER {
+        compatible = "zmk,ext-power-generic";
+        init-delay-ms = <100>;
+    };
+
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-direct";
         wakeup-source;
