@@ -3,9 +3,9 @@
 #include <dt-bindings/led/led.h>
 
 /* For right hand, the columns are offset by 19 */
-&default_transform {
-    col-offset = <19>;
-};
+// &default_transform {
+//     col-offset = <19>;
+// };
 
 &kscan0 {
     input-gpios
@@ -52,7 +52,7 @@
 
 &statusled {
     blue_led: led_0 {
-        gpios = <&gpio0 26 GPIO_ACTIVE_LOW>;
+        gpios = <&gpio0 26 GPIO_ACTIVE_HIGH>;
     };
 };
 
