@@ -1,0 +1,11 @@
+file_format: "1"
+id: test-baord
+name: TestBoard
+type: board
+arch: arm
+features:
+  - keys
+  - backlight
+outputs:
+  - usb
+  - ble
