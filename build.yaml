@@ -19,8 +19,10 @@
 ---
 include:
   - board: mjolnir_left
-    shield: settings_reset
   - board: mjolnir_right
+  - board: mjolnir_left_reset
+    shield: settings_reset
+  - board: mjolnir_right_reset
     shield: settings_reset
   - board: mjolnir_left_flip
   - board: mjolnir_right_flip
