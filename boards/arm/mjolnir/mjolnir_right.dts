@@ -3,9 +3,9 @@
 #include <dt-bindings/led/led.h>
 
 /* For right hand, the columns are offset by 19 */
-// &default_transform {
-//     col-offset = <19>;
-// };
+&default_transform {
+    col-offset = <19>;
+};
 
 &kscan0 {
     input-gpios

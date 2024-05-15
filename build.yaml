@@ -19,7 +19,9 @@
 ---
 include:
   - board: mjolnir_left
+    shield: settings_reset
   - board: mjolnir_right
+    shield: settings_reset
   - board: mjolnir_left_flip
   - board: mjolnir_right_flip
   - board: test-board
