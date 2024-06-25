@@ -3,12 +3,14 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/ext_power.h>
+#include "mjolnir_keypos.h"
 
 #define DEFAULT 0
-#define NUMS 1
-#define SYM 2
+#define SYM 1
+#define NAV 2
 #define CTRL 3
-#define TIMEOUT 100
+#define TIMEOUT 75
+#define TAP_TERM 200
 
 / {
   chosen {
@@ -19,52 +21,153 @@
 / {
     combos {
         compatible = "zmk,combos";
+        combo_back {
+            timeout-ms = <TIMEOUT>;
+            key-positions = <RT3 RM3>;
+            bindings = <&kp BSPC>;
+        };
         combo_esc {
-            timeout-ms = <100>;
-            key-positions = <19 24>;
+            timeout-ms = <TIMEOUT>;
+            key-positions = <LT3 LM3>;
             bindings = <&kp ESC>;
+        };
+        combo_grave {
+            timeout-ms = <TIMEOUT>;
+            key-positions = <LT4 LM4>;
+            bindings = <&kp GRAVE>;
+        };
+        combo_space {
+            timeout-ms = <TIMEOUT>;
+            key-positions = <3 13>;
+            bindings = <&kp SPACE>;
+        };
+        combo_enter {
+            timeout-ms = <TIMEOUT>;
+            key-positions = <6 16>;
+            bindings = <&kp RET>;
+        };
+        combo_layer_sym_l {
+            timeout-ms = <TIMEOUT>;
+            key-positions = <LH1 LH2>;
+            bindings = <&mo SYM>;
+        };
+        combo_layer_sym_r {
+            timeout-ms = <TIMEOUT>;
+            key-positions = <RH1 RH2>;
+            bindings = <&mo SYM>;
+        };
+        combo_layer_nav_l {
+            timeout-ms = <TIMEOUT>;
+            key-positions = <LH2 LH3>;
+            bindings = <&tog NAV>;
+        };
+        combo_layer_nav_r {
+            timeout-ms = <TIMEOUT>;
+            key-positions = <RH2 RH3>;
+            bindings = <&tog NAV>;
+        };
+        combo_layer_control_l {
+            timeout-ms = <TIMEOUT>;
+            key-positions = <LH1 LH0>;
+            bindings = <&tog CTRL>;
+        };
+        combo_layer_control_r {
+            timeout-ms = <TIMEOUT>;
+            key-positions = <RH1 RH0>;
+            bindings = <&tog CTRL>;
         };
     };
 };
 
 / {
+
+  behaviors {
+    hml: home_row_mod_left {
+        compatible = "zmk,behavior-hold-tap";
+        #binding-cells = <2>;
+        flavor = "balanced";
+        tapping-term-ms = <280>;
+        quick-tap-ms = <175>;
+        bindings = <&kp>, <&kp>;
+        hold-trigger-key-positions = <KEYS_R THUMBS>;
+        hold-trigger-on-release;  
+    };
+    hmr: home_row_mod_right {
+        compatible = "zmk,behavior-hold-tap";
+        #binding-cells = <2>;
+        flavor = "balanced";
+        tapping-term-ms = <280>;
+        quick-tap-ms = <175>;
+        bindings = <&kp>, <&kp>;
+        hold-trigger-key-positions = <KEYS_L THUMBS>;
+        hold-trigger-on-release;  
+    };
+    hmlc: home_row_mod_left_combo {
+        compatible = "zmk,behavior-hold-tap";
+        #binding-cells = <2>;
+        flavor = "balanced";
+        tapping-term-ms = <280>;
+        quick-tap-ms = <175>;
+        bindings = <&kp>, <&key_repeat>;
+        hold-trigger-key-positions = <KEYS_R THUMBS>;
+    hold-trigger-on-release;      
+    };
+  };
+
+  // conditional_layers {
+  //     compatible = "zmk,conditional-layers";
+  //     tri_layer {
+  //         if-layers = <NAV SYM>;
+  //         then-layer = <CTRL>;
+  //     };
+  // };
+
   keymap {
     compatible = "zmk,keymap";
 
     default_layer {
       display-name = "QWERTY";
       bindings = <
-        &kp Q     &kp W           &kp E     &kp R     &kp T             &kp Y     &kp U     &kp I     &kp O         &kp P    
-        &kp A     &kp S           &kp D     &kp F     &kp G             &kp H     &kp J     &kp K     &kp L         &kp SEMI 
-        &kp Z     &kp X           &kp C     &kp V     &kp B             &kp N     &kp M     &kp COMMA &kp DOT       &kp FSLH 
-                  &mo SYM         &kp LCTRL  &kp LGUI     &kp SPACE         &kp RET   &kp BSPC     &kp RALT  &mo NUMS
+        &kp Q           &kp W           &kp E         &kp R     &kp T               &kp Y       &kp U     &kp I         &kp O         &kp P    
+        &hml LCTRL A    &hml LALT S     &hml LGUI D   &hml LSHIFT F     &kp G               &kp H       &hmr RSHIFT J     &hmr RGUI K   &hmr RALT L   &hmr RCTRL SEMI 
+        &kp Z           &kp X           &kp C         &kp V     &kp B               &kp N       &kp M     &kp COMMA     &kp DOT       &kp FSLH 
+                        &none           &mo SYM       &mo TAB   &kp SPACE           &kp RET   &mo BKSP   &mo NAV    &none
               >;
     };
-    number_layer {
-      display-name = "NUMS";
-      bindings = <
-        &trans    &trans        &trans    &kp LPAR    &kp RPAR             &kp PLUS  &kp 7       &kp 8     &kp 9     &kp STAR    
-        &trans    &trans        &trans    &kp LBKT    &kp RBKT             &kp MINUS &kp 4       &kp 5     &kp 6     &kp SLASH 
-        &trans    &trans        &trans    &kp LBRC    &kp RBRC             &kp 0     &kp 1       &kp 2     &kp 3     &kp CARET 
-                  &tog CTRL        &trans    &trans      &kp SPACE                      &kp RET   &kp EQUAL   &kp DOT   &kp BSPC
-              >;
-    };
-    symbol_layer {
+    symbol_layer { 
       display-name = "SYMBOL";
       bindings = <
-        &kp F1     &kp F2          &kp F3     &kp F4     &kp F5             &kp F6     &kp F7     &kp F8     &kp F9         &kp F10    
-        &kp N1     &kp N2           &kp N3     &kp N4     &kp N5             &kp N6     &kp N7     &kp N8     &kp N9         &kp N0 
-        &kp EXCL     &kp AT           &kp HASH     &kp DLLR     &kp PRCNT             &kp CARET     &kp AMPS     &kp STAR &kp LPAR       &kp RPAR 
-                  &kp EQUAL     &kp LGUI  &mo 1     &kp SPACE         &kp RET   &mo 2     &kp RALT  &tog CTRL
+        &kp EXCL    &kp AT        &kp LPAR          &kp RPAR            &kp PIPE             &kp PLUS   &kp N7        &kp N8      &kp N9      &kp STAR    
+        &kp HASH    &kp DLLR      &kp LBKT         &kp RBKT            &kp SINGLE_QUOTE             &kp MINUS  &kp N4        &kp N5      &kp N6      &kp SLASH 
+        &kp PRCNT   &kp AMPS      &kp LBRC          &kp RBRC            &kp BACKSLASH             &kp N0     &kp N1        &kp N2      &kp N3      &kp CARET 
+                    &trans        &trans  &trans   &trans               &trans    &kp EQUAL     &kp DOT     &kp N0
               >;
+    };
+    nav_layer {
+      display-name = "NAV";
+      bindings = <
+        &none  &none  &none  &none  &none      &kp PAGE_UP  &none    &none    &none  &none
+        &none  &none  &none  &none  &none      &kp PAGE_DOWN  &none    &kp UP    &none  &none
+        &none  &none  &none  &none  &none      &kp HOME  &kp LEFT  &kp DOWN  &kp RIGHT  &kp END
+                &none  &none  &none  &none      &none  &none    &none    &none 
+                    >;
     };
     control_layer {
       display-name = "CONTROL";
       bindings = <
-        &ext_power EP_TOG     &rgb_ug RGB_BRI   &rgb_ug RGB_HUI     &rgb_ug RGB_SAI     &rgb_ug RGB_SPI             &bt BT_CLR    &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    
-        &rgb_ug RGB_EFF     &rgb_ug RGB_BRD     &rgb_ug RGB_HUD     &rgb_ug RGB_SAD     &rgb_ug RGB_SPD             &trans    &trans    &trans    &trans    &trans
-        &rgb_ug RGB_EFR     &ext_power EP_ON    &ext_power EP_OFF   &trans              &trans                      &trans    &trans    &trans    &trans    &trans
-                            &tog CTRL           &trans              &trans          &bootloader                 &bootloader   &trans    &trans    &tog CTRL      
+        &ext_power EP_TOG     &rgb_ug RGB_BRI     &rgb_ug RGB_HUI     &rgb_ug RGB_SAI     &rgb_ug RGB_SPI             &bt BT_CLR    &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    
+        &rgb_ug RGB_EFF       &rgb_ug RGB_BRD     &rgb_ug RGB_HUD     &rgb_ug RGB_SAD     &rgb_ug RGB_SPD             &kp F1        &kp F2          &kp F3          &kp F4          &kp F5
+        &rgb_ug RGB_EFR       &none              &none              &none              &none                      &kp F6        &kp F7          &kp F8          &kp F9          &kp F10
+                              &none              &none              &none              &bootloader                 &bootloader   &kp F11         &kp F12         &none     
+              >;
+    };
+    numpad_layer { 
+      display-name = "NUMPAD";
+      bindings = <
+        &kp EXCL    &kp AT        &kp LPAR          &kp RPAR            &kp PIPE              &kp PLUS    &kp N7        &kp N8      &kp N9      &kp STAR    
+        &kp HASH    &kp DLLR      &kp LBKT         &kp RBKT             &none                 &kp MINUS   &kp N4        &kp N5      &kp N6      &kp SLASH 
+        &kp PRCNT   &kp AMPS      &kp LBRC          &kp RBRC            &kp BACKSLASH         &kp RET      &kp N1        &kp N2      &kp N3      &kp CARET 
+                    &trans        &trans  &trans   &trans                                     &none      &kp EQUAL     &kp DOT     &kp N0
               >;
     };
   };

@@ -26,13 +26,18 @@ config USB_NRFX
 
 config USB_DEVICE_STACK
     default y
+    
+endif # USB
+
+config ZMK_MAX17048
+	default y 
+
+
+if ZMK_DISPLAY
 
 config I2C
-	default y
+    default y
 
-config MAX17048
-	default y
-
-endif # USB
+endif # ZMK_DISPLAY
 
 endif # BOARD_MJOLNIR_LEFT || BOARD_MJOLNIR_RIGHT || BOARD_MJOLNIR_RIGHT_FLIP || BOARD_MJOLNIR_LEFT_FLIP
